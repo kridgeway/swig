@@ -1718,7 +1718,7 @@ void OBJECTIVEC::marshalInputArgs(ParmList *parmlist, Wrapper *wrapper) {
   Parm *p;
   int i = 0;
 
-  for (p = parmlist; p; p = nextSibling(p), i++) {
+  for (p = parmlist; p; i++) {
     p = skipIgnoredArgs(p);
     SwigType *pt = Getattr(p, "type");
     
@@ -1735,6 +1735,7 @@ void OBJECTIVEC::marshalInputArgs(ParmList *parmlist, Wrapper *wrapper) {
       p = nextSibling(p);
     }
     Delete(arg);
+    if (p) p= nextSibling(p);
   }
 
 }
@@ -1754,7 +1755,7 @@ void OBJECTIVEC::makeParameterList(ParmList *parmlist, Wrapper *wrapper) {
   int i = 0;
   int gencomma = 0;
 
-  for (p = parmlist; p; p = nextSibling(p), i++) {
+  for (p = parmlist; p; i++) {
     p = skipIgnoredArgs(p);
     SwigType *pt = Getattr(p, "type");
     
@@ -1777,6 +1778,7 @@ void OBJECTIVEC::makeParameterList(ParmList *parmlist, Wrapper *wrapper) {
 
     Delete(imparmtype);
     Delete(arg);
+    if (p) p= nextSibling(p);
   }
 }
 
